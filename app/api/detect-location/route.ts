@@ -24,7 +24,6 @@ export async function GET(request: NextRequest) {
       (vercelForwarded ? vercelForwarded.split(",")[0].trim() : "") ||
       (forwarded ? forwarded.split(",")[0].trim() : "") ||
       (realIp ? realIp.trim() : "") ||
-      request.ip ||
       "unknown";
 
     if (debugGeo) {
@@ -33,7 +32,7 @@ export async function GET(request: NextRequest) {
         "x-forwarded-for": forwarded,
         "x-real-ip": realIp,
       });
-      console.log("[geo-debug] ip", { ip, requestIp: request.ip });
+      console.log("[geo-debug] ip", { ip });
     }
 
     let countryCode = "US"; // default
